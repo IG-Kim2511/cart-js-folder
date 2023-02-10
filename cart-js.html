@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
+</head>
+<style>
+
+*{
+    font-family: 'Nunito', sans-serif;
+    margin: 0; 
+    padding: 0;    
+    box-sizing: border-box;
+    outline: none; 
+    border: none;
+    text-decoration: none;
+    transition: all .2s linear;
+}
+
+html{    
+    font-size: 62.5%;
+    overflow-x: hidden;
+      /* 🍚scroll-padding-top:
+  scroll했을때 top에 padding을 넣고 멈춤
+   https://developer.mozilla.org/en-US/docs/Web/CSS/scroll-padding-top  */
+    scroll-padding-top: 6rem;
+    scroll-behavior: smooth;
+}
+
+section{
+    padding: 2rem 9%;
+}
+
+.heading{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 4rem;
+    color: var(--black);
+    padding: 1rem;
+}
+
+.heading span{
+    text-transform: uppercase;
+    color: var(--orange);
+}
+
+.btn{
+    display: inline-block;
+    margin-top: 1rem;
+    border-radius: .5rem;
+    border: 0.2rem solid var(--black);
+    font-weight: bolder;
+    font-size: 1.7rem;
+    color: var(--black);
+    cursor: pointer;
+    background-color: #fff;
+    padding: 0.8rem 3rem;
+}
+
+.btn:hover{
+    background:var(--orange);
+    color:#fff;
+}
+
+.btn:active {
+    position: relative;
+    top: 1px;
+  }
+
+
+/* header section*/
+
+header{
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    background-color: #fff;
+    padding: 2rem 9%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1); 
+    
+}
+
+header .logo{
+    font-size: 2.5rem;
+    color: var(--black);
+}
+
+header .navbar a{
+    font-size: 1.7rem;
+    color: var(--black);
+    margin: 0 1rem;
+}
+
+header .navbar a:hover{
+    color: var(--orange);
+}
+
+header .icons a {
+    font-size: 2.5rem;
+    color: var(--black);
+    margin-left: 1.5rem;
+    
+}
+
+header .icons a:hover{
+    color: var(--orange);
+}
+
+#menu-bar{
+    font-size: 2.5rem;
+    padding: 0.5rem 1.5rem;
+    border: 0.1rem solid var(--black);
+    color: var(--black);
+    border-radius: 0.3rem;
+    cursor: pointer;
+    display: none; /* 🥒css30 */
+}
+
+/*Latest products section */
+
+.products .box-container{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.products .box-container .box{
+    flex:1 1 30rem;
+
+    position: relative;
+
+    border:.1rem solid rgba(0,0,0,.1);
+    border-radius: .5rem;
+    text-align: center;
+
+    overflow: hidden;
+    background:#f9f9f9;
+
+}
+
+.products .box-container .box .content{
+    padding:1.5rem;
+}
+
+.products .box-container .box img{
+    height: 10rem;
+    transform: rotate(-35deg);
+
+    /* 🦄filter  이미지에 세피아, 흑백같은 효과 넣기*/
+    filter: drop-shadow(0 0.5rem 1rem ); 
+
+    margin: 8rem 2rem;
+}
+
+.products .box-container .box:hover img{
+    transform: rotate( 0deg) scale(1.2);
+}
+
+.products .box-container .box .icons{
+    display: flex;
+    flex-flow: column;  /* 🦄flex-flow */
+    position: absolute; 
+    top:.5rem; left:-10rem; /* css */
+
+}
+
+.products .box-container .box:hover .icons{
+    left:1rem;
+}
+
+.products .box-container .box .icons button{
+    height:4.5rem;
+    width:5rem;
+    line-height: 4.5rem;
+    font-size: 2rem;
+    color:var(--black);
+    border:.1rem solid var(--black);
+    border-radius: .5rem;
+    background:#fff;
+    margin-top: .5rem;
+}
+
+.products .box-container .box .icons button:hover{
+    background:var(--orange);
+    color:#fff;
+}
+  
+.products .box-container .box .content h3{
+    color:var(--black);
+    font-size: 2.5rem;
+}
+
+.products .box-container .box .content .price{
+    color:var(--black);
+    font-size: 2.5rem;
+    font-weight: bolder;
+    padding:1rem 0;
+}
+  
+.products .box-container .box .content .price span{
+    color:var(--orange);
+    font-size: 1.5rem;
+    text-decoration: line-through; /* 🦄 text-decoration */
+    
+}
+  
+.products .box-container .box .content .stars{
+    padding-bottom: 1rem;
+}
+
+.products .box-container .box .content .stars i{
+    font-size: 1.7rem;
+    color:var(--orange);
+}
+
+
+
+
+/*🍀🥒js13 CART */
+.cart {
+    width: 100%;
+    position: relative;
+}
+
+.cart-header {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+}
+
+.cart-items {
+    max-height: calc(100vh - 247px);
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-around;
+    padding: 10px 0;
+
+}
+.cart-item div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.cart-item .item-info {
+    flex: 1;
+    background-color: rgba(255, 255, 255, 0.6);
+
+    border-radius: 0 10px 10px 0;
+
+    padding: 10px;
+}
+.cart-item .item-info:hover {
+    background-color: var(--orange);
+    cursor: pointer;
+}
+.cart-item .item-info img {
+    width: 175px;        
+}
+
+.cart-item .unit-price .delete {
+    width: 40px;        
+}
+
+.cart-item .item-info h4{
+    font-size: 20px;
+}
+
+.cart-item .unit-price {
+    flex: 1;
+    font-size: 20px;
+}
+
+.cart-item .units {
+    flex: 1;
+}
+.cart-item .units .number {
+    margin: 0 10px;
+
+    font-size: 20px;
+}
+
+.cart-item .delete {
+    
+    cursor: pointer;
+
+}
+
+.cart-item .delete:hover{
+    background:var(--orange);
+    color:#fff;
+
+    border-radius: 0.3rem;
+}
+
+
+
+.cart-item .units .mybtn {
+    border-radius: 50%;
+    border: #000 1px solid;
+    padding: 1rem;
+
+    cursor: pointer;
+
+}    
+
+.cart-item .units .mybtn:hover{
+    background:var(--orange);
+    color:#fff;
+}
+
+
+
+</style>
+<body>
+
+
+     <h1>👉me_2021-1230-Ecommerce_Shoes-Slideshow-JS</h1>
+<section class="products" id="products">
+
+    <h1 class="heading"> latest <span>products</span> </h1>
+
+    <div class="box-container">
+        <!-- 🥒 js100. rendering -->
+
+    </div>
+
+</section>
+   <!-- Latest products section -->
+
+
+         <!-- cart section -->
+  <!-- <section id="cartSection"> -->
+  <section class="cartSection">
+        
+    <h1 class="heading"><span>Cart</span> </h1>
+
+    <div class="cart">
+        <div class="cart-header">
+            <div class="column1"></div>
+            <div class="column2"> </div>
+            <div class="column3"></div>
+        </div>
+        <div class="cart-items">
+
+            <!-- 🥒js13-40 - render Cart Items -->
+        <!-- 
+
+            <div class="cart-item">
+                <div class="item-info">                    
+                    <img src="${pp_item.imgSrc}" alt="${pp_item.name}">
+                    <h4>item.name</h4>
+                </div>
+                <div class="unit-price">
+                    <small>$</small>item.price
+                </div>
+                <div class="units">
+                    <div class="btn minus" >-</div>
+                    <div class="number">numberOfUnits</div>
+                    <div class="btn plus" >+</div>           
+                </div>
+            </div>
+
+        -->
+        </div>
+        <div class="cart-footer">
+            <div class="delete-all">
+                <button class="delete-all-btn btn">delete all</button>
+            </div>
+            <h1 class="subtotal">
+                Subtotal (0 items): $0
+            </h1>
+            <div class="checkout">
+                <button class="btn checkoutBtn">Proceed to checkout</button>
+                
+            </div>
+        </div>
+  </section>
+     <!-- cart section -->
+    
+
+    <script>
+// const
+const boxContainer = document.querySelector('.products .box-container');
+const cartItemsEl = document.querySelector('.cart-items');
+console.log(cartItemsEl)
+const subtotalEl = document.querySelector('.subtotal')
+
+const menu = document.querySelector('#menu-bar');
+const navbar = document.querySelector('.navbar');
+
+
+const productsData = [
+    {
+      id: 0,
+      name: "nike shoes 1",
+      price: 29.99,
+      instock: 9,
+      description: "inventory : 9",
+      imgSrc: "./images/product-1.png",
+      //🍖js13. numberOfUnits:1
+    },
+    {
+      id: 1,
+      name: "nike shoes 2",
+      price: 24.99,
+      instock: 8,
+      description: "inventory : 8",
+      imgSrc: "./images/product-2.png",
+    },
+    {
+      id: 2,
+      name: "nike shoes 3",
+      price: 19.99,
+      instock: 10,
+      description: "inventory : 10",
+      imgSrc: "./images/product-3.png",
+    },
+    {
+      id: 3,
+      name: "nike shoes 4",
+      price: 25.99,
+      instock: 5,
+      description: "inventory : 5",
+      imgSrc: "./images/product-4.png",
+    },
+    {
+      id: 4,
+      name: "nike shoes 5",
+      price: 29.99,
+      instock: 4,
+      description: "inventory : 4",
+      imgSrc: "./images/product-5.png",
+    },
+    {
+      id: 5,
+      name: "nike shoes 6",
+      price: 39.99,
+      instock: 7,
+      description: "inventory : 7",
+      imgSrc: "./images/product-6.png",
+    },
+  ];
+  
+
+//🍀 js100. rendering latest products
+
+
+console.log(productsData)
+
+renderProducts();
+function renderProducts() {
+    productsData.forEach((p_product)=>{        
+        boxContainer.innerHTML += `    
+            <div class="box">
+                <div class="icons">
+                    <button href="#" class="fas fa-heart"></button>             
+                    <button href="#" class="fas fa-shopping-cart"  onclick="addToCart(${p_product.id})"></button>
+                </div>
+                <img src="${p_product.imgSrc}" alt="">
+                <div class="content">
+                    <h3>${p_product.name}</h3>
+                    <div class="price">$${p_product.price} <span>$60</span></div>
+                    <div class="stars">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="far fa-star"></i>
+                    </div>
+                    <div class="price">inventory: ${p_product.instock}</div>
+                    <button class="btn" onclick="addToCart(${p_product.id})">add to cart</button>
+                </div>
+            </div>
+        `  
+    });  
+}
+
+
+// 🍀js13. addToCart, 새로운 항목 numberOfUnit...object에 추가하기
+
+/* 🍚
+    JSON.parse(localStorage.getItem("CART")) || [];
+
+    cart.some((pp_item) => pp_item.id === p_id)
+    
+    productsData.find((pp_product) => pp_product.id === p_id);
+*/
+
+// let cart =[];
+let cart = JSON.parse(localStorage.getItem("CART")) || [];
+
+/* 
+   🦄설명:
+   https://github.com/IG-Kim2511/me_2021-1109-cloth-Shopping_Cart-ig-js
+*/
+
+function addToCart(p_id) {    
+        // 🍉js13-30
+        if (cart.some((pp_item) => pp_item.id === p_id)) {      
+      
+            // alert(`This item is already on the cart`);
+
+            changeNumberOfUnits('plus',p_id)                    
+        } 
+        // 🍉js13-20
+        else {
+            const item = productsData.find((pp_product) => pp_product.id === p_id);
+    
+            // cart.push(item);
+            cart.push(
+                {
+                    ...item,
+                    numberOfUnits: 1,
+                }
+            );
+        }
+        console.log(cart)
+        updateCart(); 
+}
+
+
+// 🍀js13-40.update Cart
+// 🍀js45. localStorage. save cart to local  storage
+/* 
+   🦄설명:
+   https://github.com/IG-Kim2511/me_2021-1109-cloth-Shopping_Cart-ig-js
+*/
+
+
+
+function updateCart() {
+    renderCartItems();
+    renderSubtotal();
+    
+    // js 45-10, js45-20
+    // localStorage.setItem('CART',cart);
+    localStorage.setItem('CART',JSON.stringify(cart));    
+}
+updateCart();
+
+
+// 🍀js13-40. renderCartItems :  cart에 아이템 render
+
+/* 🍄
+    onclick "changeNumberOfUnits" - 🥒js28
+    onclick "removeItemFromCart" - 🥒js41
+*/
+
+
+function renderCartItems() {
+     /* 클릭할때마다 초기화 (초기화안하면, + - 할때,  이전목록도 같이 render됨)*/
+   cartItemsEl.innerHTML=""; 
+
+    cart.forEach((pp_item)=>{
+        cartItemsEl.innerHTML += `
+            <div class="cart-item">
+            <div class="item-info" onclick="removeItemFromCart(${pp_item.id})">
+                <img src="${pp_item.imgSrc}" alt="${pp_item.name}">
+                <h4>${pp_item.name}</h4>
+            </div>
+            <div class="unit-price">
+                <small>$</small>${pp_item.price}
+                <img src="./images/icons8-delete-128.png" alt="" class="delete"  onclick="removeItemFromCart(${pp_item.id})">
+            </div>
+            <div class="units">
+                <div class="mybtn plus" onclick="changeNumberOfUnits('plus', ${pp_item.id})"><i class="fa-solid fa-plus"></i></div>           
+                <div class="number">${pp_item.numberOfUnits}</div>
+                <div class="mybtn minus" onclick="changeNumberOfUnits('minus', ${pp_item.id})"><i class="fa-solid fa-minus"></i></div>
+            </div>
+        </div>
+        `
+    });
+}
+
+
+// 🍀js28. + - 버튼 클릭한때, change Number Of Units, 
+/* 
+   🦄설명:
+   https://github.com/IG-Kim2511/me_2021-1109-cloth-Shopping_Cart-ig-js
+*/
+
+
+function changeNumberOfUnits(action, id) {
+    cart = cart.map((item) => {
+      let numberOfUnits = item.numberOfUnits;
+  
+      if (item.id === id) {
+        if (action === "minus" && numberOfUnits > 1) {
+          numberOfUnits--;
+        } else if (action === "plus" && numberOfUnits < item.instock) {
+          numberOfUnits++;     
+          
+        }         
+        else if (action === "plus" && numberOfUnits === item.instock) {
+            // alert('out of stock');            
+         
+          }  
+      }
+  
+      return {
+        ...item,
+  
+        numberOfUnits: numberOfUnits, /* 🥒js3510. */
+      // numberOfUnits,
+      };
+    });
+  
+    updateCart();
+  }
+
+  
+  
+//🦄 🍀js35. calculate, renderSubtotal 
+/* 
+   🦄설명:
+   https://github.com/IG-Kim2511/me_2021-1109-cloth-Shopping_Cart-ig-js
+*/
+
+
+function renderSubtotal() {
+    let totalPrice = 0;
+    let totalItems = 0;
+
+    cart.forEach((pp_item)=>{
+        totalPrice += pp_item.price * pp_item.numberOfUnits;
+        totalItems += pp_item.numberOfUnits;
+    });
+
+    // subtotalEl.innerHTML =  `Subtotal (0 items): $0`;
+    subtotalEl.innerHTML =  `Subtotal (${totalItems} items): $ ${totalPrice.toFixed(2)}`;
+}
+
+
+// 🍀js41. remove item from cart
+/* 
+   🦄설명:
+   https://github.com/IG-Kim2511/me_2021-1109-cloth-Shopping_Cart-ig-js
+*/
+
+
+function removeItemFromCart(p_id) {
+    cart = cart.filter (pp_item => pp_item.id !== p_id);
+
+    updateCart();    
+}
+
+
+//🍀  localStorage.clear(); /  location.reload();    
+// 🥒js13-10,
+
+const deleteAllBtn = document.querySelector('.delete-all-btn');
+const checkoutBtn = document.querySelector('.checkoutBtn');
+
+deleteAllBtn.addEventListener('click',()=>{
+    localStorage.clear();
+    location.reload();    
+});
+
+checkoutBtn.addEventListener('click',()=>{
+    localStorage.clear();
+    location.reload();    
+   
+    alert(`Thank you`);
+    
+
+});
+
+
+    </script>
+</body>
+</html>
